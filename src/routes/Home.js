@@ -5,13 +5,12 @@ import Header from '../components/Header';
 import Container from '../components/Container';
 import { connect } from 'react-redux';
 import { add } from '../store';
+import { FaPlus } from 'react-icons/fa';
 
 function Home({ voca, addWord }) {
-  // console.log(voca);
-
   return (
     <>
-      <Header>단어장</Header>
+      <Header>중국어 단어장</Header>
       <Container>
         <Cards>
           {voca.map((voca) => (
@@ -19,12 +18,23 @@ function Home({ voca, addWord }) {
           ))}
         </Cards>
         <Link to={`/word/add`}>
-          <AddBtn></AddBtn>
+          <AddBtn>
+            <FaPlus color="#fff" size="25" />
+          </AddBtn>
         </Link>
       </Container>
     </>
   );
 }
+
+const Cards = styled.div`
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+
+  gap: 20px;
+`;
 
 const AddBtn = styled.div`
   position: fixed;
@@ -35,16 +45,15 @@ const AddBtn = styled.div`
   border: none;
   bottom: 30px;
   right: 30px;
-  box-shadow: 3px 3px 10px rgb(230, 125, 154);
-`;
+  box-shadow: 0px 0px 10px rgb(230, 125, 154);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-duration: 0.5s;
 
-const Cards = styled.div`
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-
-  gap: 20px;
+  &:hover {
+    transform: rotate(90deg);
+  }
 `;
 
 function getCurrentState(state) {

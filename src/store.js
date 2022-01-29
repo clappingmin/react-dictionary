@@ -4,9 +4,11 @@ const voca = createSlice({
   name: 'vocaReducer',
   initialState: [],
   reducers: {
-    add: (state, action) => {
-      state.push({ word: action.payload, id: Date.now() });
-    },
+    add: (state, action) => [
+      { word: action.payload, id: Date.now() },
+      ...state,
+    ],
+
     remove: (state, action) =>
       state.filter((word) => word.id !== action.payload),
   },

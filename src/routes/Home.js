@@ -4,10 +4,9 @@ import Card from '../components/Card';
 import Header from '../components/Header';
 import Container from '../components/Container';
 import { connect } from 'react-redux';
-import { add } from '../store';
 import { FaPlus } from 'react-icons/fa';
 
-function Home({ voca, addWord }) {
+function Home({ voca }) {
   return (
     <>
       <Header>중국어 단어장</Header>
@@ -35,7 +34,6 @@ const Cards = styled.div`
 
   gap: 20px;
 `;
-
 const AddBtn = styled.div`
   position: fixed;
   background-color: rgb(230, 125, 154);
@@ -60,12 +58,4 @@ function getCurrentState(state) {
   return { voca: state };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addWord: (text) => {
-      dispatch(add(text));
-    },
-  };
-}
-
-export default connect(getCurrentState, mapDispatchToProps)(Home);
+export default connect(getCurrentState, null)(Home);

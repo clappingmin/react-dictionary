@@ -72,6 +72,11 @@ const Container = styled.div`
   padding: 20px;
   font-size: 15px;
   line-height: 25px;
+  transition-duration: 0.5s;
+
+  &:hover {
+    box-shadow: 10px 20px 10px #555;
+  }
 
   .top {
     width: 100%;

@@ -10,6 +10,9 @@ $ yarn add react-redux
 $ yarn add react-router-dom
 $ yarn add @reduxjs/toolkit
 
+# firestore
+$ yarn add firebase
+
 # 리액트 아이콘
 $ yarn add react-icons
 ```

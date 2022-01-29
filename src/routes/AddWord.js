@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 // import styled from 'styled-components';
 import Header from '../components/Header';
 import Container from '../components/Container';
@@ -6,8 +6,13 @@ import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { add } from '../store';
 import styled from 'styled-components';
+import { db } from '../firebase';
 
 function AddWord({ addWord }) {
+  useEffect(() => {
+    console.log(db);
+  }, []);
+
   const wordRef = useRef('');
   const pinyinRef = useRef('');
   const meaningRef = useRef('');
@@ -144,8 +149,8 @@ const Input = styled.div`
 
 function mapDispatchToProps(dispatch) {
   return {
-    addWord: (text) => {
-      dispatch(add(text));
+    addWord: (obj) => {
+      dispatch(add(obj));
     },
   };
 }

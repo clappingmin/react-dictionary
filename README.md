@@ -9,4 +9,5 @@ $ npm i styled-components
 $ yarn add react-redux
 $ yarn add react-router-dom
 $ yarn add @reduxjs/toolkit
+$ yarn add react-icons
 ```

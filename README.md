@@ -13,6 +13,9 @@ $ yarn add @reduxjs/toolkit
 # firestore
 $ yarn add firebase
 
+# 리덕스 미들웨어
+yarn add redux-thunk
+
 # 리액트 아이콘
 $ yarn add react-icons
 ```

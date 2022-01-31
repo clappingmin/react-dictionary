@@ -5,8 +5,14 @@ import Header from '../components/Header';
 import Container from '../components/Container';
 import { connect } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
+import { load, loadWordFB } from '../store';
+import { useEffect } from 'react';
 
-function Home({ voca }) {
+function Home({ voca, loadWord }) {
+  useEffect(() => {
+    loadWord();
+  }, []);
+
   return (
     <>
       <Header>중국어 단어장</Header>
@@ -36,7 +42,7 @@ const Cards = styled.div`
 `;
 const AddBtn = styled.div`
   position: fixed;
-  background-color: rgb(230, 125, 154);
+  background-color: rgb(247, 203, 228);
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -58,4 +64,12 @@ function getCurrentState(state) {
   return { voca: state };
 }
 
-export default connect(getCurrentState, null)(Home);
+function mapDispatchToProps(dispatch) {
+  return {
+    loadWord: () => {
+      dispatch(loadWordFB());
+    },
+  };
+}
+
+export default connect(getCurrentState, mapDispatchToProps)(Home);

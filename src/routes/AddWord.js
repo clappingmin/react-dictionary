@@ -4,15 +4,10 @@ import Header from '../components/Header';
 import Container from '../components/Container';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { add } from '../store';
+import { add, addWordFB } from '../store';
 import styled from 'styled-components';
-import { db } from '../firebase';
 
 function AddWord({ addWord }) {
-  useEffect(() => {
-    console.log(db);
-  }, []);
-
   const wordRef = useRef('');
   const pinyinRef = useRef('');
   const meaningRef = useRef('');
@@ -47,6 +42,7 @@ function AddWord({ addWord }) {
       meaning: meaning,
       exam: exam,
       interpre: interpretation,
+      clicked: false,
     };
 
     addWord(wordObj);
@@ -150,7 +146,7 @@ const Input = styled.div`
 function mapDispatchToProps(dispatch) {
   return {
     addWord: (obj) => {
-      dispatch(add(obj));
+      dispatch(addWordFB(obj));
     },
   };
 }

@@ -2,58 +2,65 @@ import styled from 'styled-components';
 // 리액트 아이콘
 import { BsPencilSquare, BsTrashFill } from 'react-icons/bs';
 import { GiCheckMark } from 'react-icons/gi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function Card({ voca }) {
-  const {
-    word: { word, pinyin, meaning, exam, interpre },
-  } = voca;
+// 리덕스
+import { connect } from 'react-redux';
+import { color, updateColorFB } from '../store';
 
-  const [clicked, setClicked] = useState(false);
+import { db } from '../firebase';
+import { collection, doc, updateDoc } from 'firebase/firestore';
+
+function Card({ voca, colorWord }) {
+  const { word, pinyin, meaning, exam, interpre } = voca;
+  let { clicked } = voca;
+
+  const [color, setColor] = useState(clicked);
 
   function onClick() {
-    setClicked(!clicked);
+    setColor(!clicked);
+    colorWord(voca);
   }
 
   return (
-    <Container style={{ background: clicked ? 'rgb(230, 125, 154)' : '#fff' }}>
+    <Container style={{ background: color ? 'rgb(230, 125, 154)' : '#fff' }}>
       <div className="top">
-        <div className="title" style={{ color: clicked ? '#fff' : '#000' }}>
+        <div className="title" style={{ color: color ? '#fff' : '#000' }}>
           {word}
         </div>
         <div className="btn">
           <GiCheckMark
             size="20"
             onClick={onClick}
-            color={clicked ? '#fff' : 'rgb(230, 125, 154)'}
+            color={color ? '#fff' : 'rgb(230, 125, 154)'}
           />
 
           <BsPencilSquare
             size="20"
-            color={clicked ? '#fff' : 'rgb(230, 125, 154)'}
+            color={color ? '#fff' : 'rgb(230, 125, 154)'}
           />
 
           <BsTrashFill
             size="20"
-            color={clicked ? '#fff' : 'rgb(230, 125, 154)'}
+            color={color ? '#fff' : 'rgb(230, 125, 154)'}
           />
         </div>
       </div>
-      <div className="pinyin" style={{ color: clicked ? '#fff' : '#000' }}>
+      <div className="pinyin" style={{ color: color ? '#fff' : '#000' }}>
         [{pinyin}]
       </div>
-      <div className="mean" style={{ color: clicked ? '#fff' : '#000' }}>
+      <div className="mean" style={{ color: color ? '#fff' : '#000' }}>
         {meaning}
       </div>
       <div
         className="example"
-        style={{ color: clicked ? '#fff' : 'rgb(61, 131, 211)' }}
+        style={{ color: color ? '#fff' : 'rgb(61, 131, 211)' }}
       >
         {exam}
       </div>
       <div
         className="interpretation"
-        style={{ color: clicked ? '#fff' : 'rgb(61, 131, 211)' }}
+        style={{ color: color ? '#fff' : 'rgb(61, 131, 211)' }}
       >
         {interpre}
       </div>
@@ -75,7 +82,7 @@ const Container = styled.div`
   transition-duration: 0.5s;
 
   &:hover {
-    box-shadow: 10px 20px 10px #555;
+    box-shadow: 10px 10px 30px;
   }
 
   .top {
@@ -138,4 +145,12 @@ const Container = styled.div`
   }
 `;
 
-export default Card;
+function mapDispatchToProps(dispatch) {
+  return {
+    colorWord: (voca) => {
+      dispatch(updateColorFB(voca));
+    },
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Card);

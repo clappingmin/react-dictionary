@@ -20,7 +20,6 @@ export const loadWordFB = () => {
   return async function (dispatch) {
     // 데이터를 가져와요!
     const word_data = await getDocs(collection(db, 'word'));
-    console.log('hi!');
 
     let word_list = [];
 
@@ -32,7 +31,6 @@ export const loadWordFB = () => {
     });
 
     // 잘 만들어졌는 지 리스트도 확인해봐요! :)
-    console.log(word_list);
     dispatch(load(word_list));
   };
 };
@@ -46,14 +44,14 @@ export const addWordFB = (load) => {
     // 추가한 데이터 중 id를 가져와서 bucket_data를 만들어줬어요!
     const load_data = { id: docRef.id, ...load };
     // 그럼 이제 액션을 일으키자! (수정해달라고 요청하자!)
-    dispatch(add(load_data));
+
+    dispatch(load(load_data));
   };
 };
 
 // 데이터 수정하기
 export const updateColorFB = (word) => {
   return async function (dispatch, getState) {
-    console.log('3');
     // 수정할 도큐먼트를 가져오고,
     const docRef = doc(db, 'word', word.id);
     // 수정합시다!
@@ -70,7 +68,6 @@ const voca = createSlice({
   initialState: [],
   reducers: {
     load: (state, action) => action.payload,
-    add: (state, action) => [{ ...action.payload }, ...state],
     color: (state, action) => {
       state.map((word) => {
         if (word.id === action.payload) word.clicked = !word.clicked;
@@ -81,6 +78,6 @@ const voca = createSlice({
 
 const store = configureStore({ reducer: voca.reducer, enhancer });
 
-export const { load, add, color } = voca.actions;
+export const { load, color } = voca.actions;
 
 export default store;

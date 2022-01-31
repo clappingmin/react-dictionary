@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import Container from '../components/Container';
 import { connect } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
-import { load, loadWordFB } from '../store';
+import { loadWordFB } from '../store';
 import { useEffect } from 'react';
 
 function Home({ voca, loadWord }) {
@@ -54,6 +54,7 @@ const AddBtn = styled.div`
   justify-content: center;
   align-items: center;
   transition-duration: 0.5s;
+  cursor: pointer;
 
   &:hover {
     transform: rotate(90deg);

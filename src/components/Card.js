@@ -2,24 +2,30 @@ import styled from 'styled-components';
 // 리액트 아이콘
 import { BsPencilSquare, BsTrashFill } from 'react-icons/bs';
 import { GiCheckMark } from 'react-icons/gi';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // 리덕스
 import { connect } from 'react-redux';
-import { color, updateColorFB } from '../store';
+import { updateColorFB } from '../store';
 
-import { db } from '../firebase';
-import { collection, doc, updateDoc } from 'firebase/firestore';
+// 페이지 이동
+import { useNavigate } from 'react-router-dom';
 
 function Card({ voca, colorWord }) {
-  const { word, pinyin, meaning, exam, interpre } = voca;
+  const { word, pinyin, meaning, exam, interpre, id } = voca;
   let { clicked } = voca;
 
   const [color, setColor] = useState(clicked);
 
+  const navigate = useNavigate();
+
   function onClick() {
     setColor(!clicked);
     colorWord(voca);
+  }
+
+  function onUdateBtn() {
+    navigate(`/word/${id}`);
   }
 
   return (
@@ -38,6 +44,7 @@ function Card({ voca, colorWord }) {
           <BsPencilSquare
             size="20"
             color={color ? '#fff' : 'rgb(230, 125, 154)'}
+            onClick={onUdateBtn}
           />
 
           <BsTrashFill
@@ -104,6 +111,7 @@ const Container = styled.div`
       display: flex;
       justify-content: space-between;
       padding: 0 px;
+      cursor: pointer;
 
       button {
         background-color: transparent;

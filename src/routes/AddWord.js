@@ -1,11 +1,13 @@
-import React, { useRef, useEffect } from 'react';
-// import styled from 'styled-components';
+import React, { useRef } from 'react';
+// 마크업
+import styled from 'styled-components';
 import Header from '../components/Header';
 import Container from '../components/Container';
+// 리액트 리덕스, 파이어베이스
 import { connect } from 'react-redux';
+import { addWordFB } from '../store';
+// 화면 이동
 import { useNavigate } from 'react-router-dom';
-import { add, addWordFB } from '../store';
-import styled from 'styled-components';
 
 function AddWord({ addWord }) {
   const wordRef = useRef('');
@@ -53,38 +55,38 @@ function AddWord({ addWord }) {
     <>
       <Header>중국어 단어장</Header>
       <Container>
-        <Addbox>
+        <Wordbox>
           <h1>단어 추가하기</h1>
           <form onSubmit={onSubmit}>
             <Input>
-              <p>단어</p>
+              <label>단어</label>
               <input ref={wordRef}></input>
             </Input>
             <Input>
-              <p>병음</p>
+              <label>병음</label>
               <input ref={pinyinRef}></input>
             </Input>
             <Input>
-              <p>의미</p>
+              <label>의미</label>
               <input ref={meaningRef}></input>
             </Input>
             <Input>
-              <p>예문</p>
+              <label>예문</label>
               <input ref={examRef}></input>
             </Input>
             <Input>
-              <p>해석</p>
+              <label>해석</label>
               <input ref={interpretationRef}></input>
             </Input>
             <button>추가하기</button>
           </form>
-        </Addbox>
+        </Wordbox>
       </Container>
     </>
   );
 }
 
-const Addbox = styled.div`
+const Wordbox = styled.div`
   height: 450px;
   width: 400px;
   background-color: #fff;

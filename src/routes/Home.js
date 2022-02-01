@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Card from '../components/Card';
@@ -6,7 +7,6 @@ import Container from '../components/Container';
 import { connect } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
 import { loadWordFB } from '../store';
-import { useEffect } from 'react';
 
 function Home({ voca, loadWord }) {
   useEffect(() => {

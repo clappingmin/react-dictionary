@@ -4,7 +4,6 @@ import thunk from 'redux-thunk';
 import {
   collection,
   doc,
-  getDoc,
   getDocs,
   addDoc,
   updateDoc,
@@ -36,16 +35,18 @@ export const loadWordFB = () => {
 };
 
 // 데이터 추가하기
-export const addWordFB = (load) => {
+export const addWordFB = (wordObj) => {
   return async function (dispatch) {
     // 파이어스토어에 추가하기를 기다려요!
-    const docRef = await addDoc(collection(db, 'word'), load);
+    const docRef = await addDoc(collection(db, 'word'), wordObj);
 
     // 추가한 데이터 중 id를 가져와서 bucket_data를 만들어줬어요!
-    const load_data = { id: docRef.id, ...load };
+    const load_data = { id: docRef.id, ...wordObj };
     // 그럼 이제 액션을 일으키자! (수정해달라고 요청하자!)
 
-    dispatch(load(load_data));
+    loadWordFB();
+
+    // dispatch(load(load_data));
   };
 };
 
@@ -59,7 +60,21 @@ export const updateColorFB = (word) => {
     // getState()를 사용해서 스토어의 데이터를 가져올 수 있어요.
     console.log(getState());
 
-    dispatch(color(word.id));
+    loadWordFB();
+  };
+};
+
+// 데이터 삭제하기
+export const deleteBucketFB = (word_id) => {
+  return async function (dispatch, getState) {
+    if (!word_id) {
+      window.alert('아이디가 없네요!');
+      return;
+    }
+    const docRef = doc(db, 'word', word_id);
+    await deleteDoc(docRef);
+
+    window.location.replace('/'); // 새로고침
   };
 };
 

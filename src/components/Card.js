@@ -2,16 +2,16 @@ import styled from 'styled-components';
 // 리액트 아이콘
 import { BsPencilSquare, BsTrashFill } from 'react-icons/bs';
 import { GiCheckMark } from 'react-icons/gi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // 리덕스
 import { connect } from 'react-redux';
-import { updateColorFB } from '../store';
+import { updateColorFB, deleteBucketFB } from '../store';
 
 // 페이지 이동
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-function Card({ voca, colorWord }) {
+function Card({ voca, colorWord, deleteWord }) {
   const { word, pinyin, meaning, exam, interpre, id } = voca;
   let { clicked } = voca;
 
@@ -24,8 +24,12 @@ function Card({ voca, colorWord }) {
     colorWord(voca);
   }
 
-  function onUdateBtn() {
+  function onUpdateBtn() {
     navigate(`/word/${id}`);
+  }
+
+  function onDelete() {
+    deleteWord(id);
   }
 
   return (
@@ -41,15 +45,23 @@ function Card({ voca, colorWord }) {
             color={color ? '#fff' : 'rgb(230, 125, 154)'}
           />
 
-          <BsPencilSquare
-            size="20"
-            color={color ? '#fff' : 'rgb(230, 125, 154)'}
-            onClick={onUdateBtn}
-          />
+          <Link
+            to={{
+              pathname: `/word/${id}`,
+              state: voca,
+            }}
+          >
+            <BsPencilSquare
+              size="20"
+              color={color ? '#fff' : 'rgb(230, 125, 154)'}
+              onClick={onUpdateBtn}
+            />
+          </Link>
 
           <BsTrashFill
             size="20"
             color={color ? '#fff' : 'rgb(230, 125, 154)'}
+            onClick={onDelete}
           />
         </div>
       </div>
@@ -157,6 +169,9 @@ function mapDispatchToProps(dispatch) {
   return {
     colorWord: (voca) => {
       dispatch(updateColorFB(voca));
+    },
+    deleteWord: (voca_id) => {
+      dispatch(deleteBucketFB(voca_id));
     },
   };
 }

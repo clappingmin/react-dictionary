@@ -1,17 +1,29 @@
+import styled from 'styled-components';
 import Header from '../components/Header';
 import Container from '../components/Container';
 import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function ModifyWord() {
-  const wordRef = useRef('');
-  const pinyinRef = useRef('');
-  const meaningRef = useRef('');
-  const examRef = useRef('');
-  const interpretationRef = useRef('');
+import { connect } from 'react-redux';
+import { loadWordFB } from '../store';
 
+function ModifyWord(props) {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  console.log(props);
+
+  const wordRef = useRef('word');
+  const pinyinRef = useRef('pinyin');
+  const meaningRef = useRef('meaning');
+  const examRef = useRef('exam');
+  const interpretationRef = useRef('interpre');
+
+  function onSubmit(e) {
+    e.preventDefault();
+
+    console.log(id);
+  }
 
   return (
     <>
@@ -19,7 +31,7 @@ function ModifyWord() {
       <Container>
         <Wordbox>
           <h1>단어 수정하기</h1>
-          <form>
+          <form onSubmit={onSubmit}>
             <Input>
               <label>단어</label>
               <input ref={wordRef}></input>
@@ -107,4 +119,12 @@ const Input = styled.div`
   }
 `;
 
-export default ModifyWord;
+function mapDispatchToProps(dispatch) {
+  return {
+    loadWord: () => {
+      dispatch(loadWordFB());
+    },
+  };
+}
+
+export default connect(null, mapDispatchToProps)(ModifyWord);

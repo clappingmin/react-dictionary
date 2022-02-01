@@ -2,10 +2,7 @@ import styled from 'styled-components';
 import Header from '../components/Header';
 import Container from '../components/Container';
 import { useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-
-import { connect } from 'react-redux';
-import { loadWordFB } from '../store';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 function ModifyWord(props) {
   const navigate = useNavigate();
@@ -27,7 +24,9 @@ function ModifyWord(props) {
 
   return (
     <>
-      <Header>중국어 단어장</Header>
+      <Link to="/">
+        <Header>중국어 단어장</Header>
+      </Link>
       <Container>
         <Wordbox>
           <h1>단어 수정하기</h1>
@@ -119,12 +118,4 @@ const Input = styled.div`
   }
 `;
 
-function mapDispatchToProps(dispatch) {
-  return {
-    loadWord: () => {
-      dispatch(loadWordFB());
-    },
-  };
-}
-
-export default connect(null, mapDispatchToProps)(ModifyWord);
+export default ModifyWord;

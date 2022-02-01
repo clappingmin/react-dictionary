@@ -15,7 +15,9 @@ function Home({ voca, loadWord }) {
 
   return (
     <>
-      <Header>중국어 단어장</Header>
+      <Link to="/">
+        <Header>중국어 단어장</Header>
+      </Link>
       <Container>
         <Cards>
           {voca.map((voca) => (

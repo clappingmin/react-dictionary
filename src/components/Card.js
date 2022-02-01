@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 // 리덕스
 import { connect } from 'react-redux';
-import { updateColorFB, deleteBucketFB } from '../store';
+import { updateColorFB, deleteWordFB } from '../store';
 
 // 페이지 이동
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,6 +14,8 @@ import { Link, useNavigate } from 'react-router-dom';
 function Card({ voca, colorWord, deleteWord }) {
   const { word, pinyin, meaning, exam, interpre, id } = voca;
   let { clicked } = voca;
+
+  console.log(voca);
 
   const [color, setColor] = useState(clicked);
 
@@ -48,7 +50,7 @@ function Card({ voca, colorWord, deleteWord }) {
           <Link
             to={{
               pathname: `/word/${id}`,
-              state: voca,
+              state: { voca },
             }}
           >
             <BsPencilSquare
@@ -171,7 +173,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(updateColorFB(voca));
     },
     deleteWord: (voca_id) => {
-      dispatch(deleteBucketFB(voca_id));
+      dispatch(deleteWordFB(voca_id));
     },
   };
 }

@@ -7,7 +7,7 @@ import Container from '../components/Container';
 import { connect } from 'react-redux';
 import { addWordFB } from '../store';
 // 화면 이동
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function AddWord({ addWord }) {
   const wordRef = useRef('');
@@ -53,7 +53,9 @@ function AddWord({ addWord }) {
 
   return (
     <>
-      <Header>중국어 단어장</Header>
+      <Link to="/">
+        <Header>중국어 단어장</Header>
+      </Link>
       <Container>
         <Wordbox>
           <h1>단어 추가하기</h1>

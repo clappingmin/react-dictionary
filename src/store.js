@@ -35,22 +35,14 @@ export const loadWordFB = () => {
 };
 
 // 데이터 추가하기
-export const addWordFB = (wordObj) => {
+export const addWordFB = (word) => {
   return async function (dispatch) {
     // 파이어스토어에 추가하기를 기다려요!
-    const docRef = await addDoc(collection(db, 'word'), wordObj);
-
-    // 추가한 데이터 중 id를 가져와서 bucket_data를 만들어줬어요!
-    const load_data = { id: docRef.id, ...wordObj };
-    // 그럼 이제 액션을 일으키자! (수정해달라고 요청하자!)
-
-    loadWordFB();
-
-    // dispatch(load(load_data));
+    const docRef = await addDoc(collection(db, 'word'), word);
   };
 };
 
-// 데이터 수정하기
+// 색상 수정하기
 export const updateColorFB = (word) => {
   return async function (dispatch, getState) {
     // 수정할 도큐먼트를 가져오고,
@@ -60,12 +52,12 @@ export const updateColorFB = (word) => {
     // getState()를 사용해서 스토어의 데이터를 가져올 수 있어요.
     console.log(getState());
 
-    loadWordFB();
+    dispatch(color(word.id));
   };
 };
 
 // 데이터 삭제하기
-export const deleteBucketFB = (word_id) => {
+export const deleteWordFB = (word_id) => {
   return async function (dispatch, getState) {
     if (!word_id) {
       window.alert('아이디가 없네요!');
@@ -74,6 +66,7 @@ export const deleteBucketFB = (word_id) => {
     const docRef = doc(db, 'word', word_id);
     await deleteDoc(docRef);
 
+    loadWordFB();
     window.location.replace('/'); // 새로고침
   };
 };

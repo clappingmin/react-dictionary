@@ -1,25 +1,59 @@
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Container from '../components/Container';
+
 import { useRef } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-function ModifyWord(props) {
+import { connect } from 'react-redux';
+import { updateWordFB } from '../store';
+
+function ModifyWord({ updateWord }) {
+  const wordRef = useRef('');
+  const pinyinRef = useRef('');
+  const meaningRef = useRef('');
+  const examRef = useRef('');
+  const interpretationRef = useRef('');
+
   const navigate = useNavigate();
-  const { id } = useParams();
 
-  console.log(props);
-
-  const wordRef = useRef('word');
-  const pinyinRef = useRef('pinyin');
-  const meaningRef = useRef('meaning');
-  const examRef = useRef('exam');
-  const interpretationRef = useRef('interpre');
+  // Card.js 42번째 라인에서 보낸 데이터 받기
+  let location = useLocation();
+  const voca = location.state;
+  const { word, pinyin, meaning, exam, interpre, id } = voca;
 
   function onSubmit(e) {
     e.preventDefault();
 
-    console.log(id);
+    const word = String(wordRef.current.value);
+    const pinyin = String(pinyinRef.current.value);
+    const meaning = String(meaningRef.current.value);
+    const exam = String(examRef.current.value);
+    const interpretation = String(interpretationRef.current.value);
+
+    if (
+      word === '' ||
+      pinyin === '' ||
+      meaning === '' ||
+      exam === '' ||
+      interpretation === ''
+    ) {
+      alert('아직 입력하지 않은 항목이 있습니다.');
+      return;
+    }
+
+    const wordObj = {
+      word: word,
+      pinyin: pinyin,
+      meaning: meaning,
+      exam: exam,
+      interpre: interpretation,
+      clicked: false,
+      id,
+    };
+
+    updateWord(wordObj);
+    navigate('/');
   }
 
   return (
@@ -33,23 +67,23 @@ function ModifyWord(props) {
           <form onSubmit={onSubmit}>
             <Input>
               <label>단어</label>
-              <input ref={wordRef}></input>
+              <input ref={wordRef} defaultValue={word}></input>
             </Input>
             <Input>
               <label>병음</label>
-              <input ref={pinyinRef}></input>
+              <input ref={pinyinRef} defaultValue={pinyin}></input>
             </Input>
             <Input>
               <label>의미</label>
-              <input ref={meaningRef}></input>
+              <input ref={meaningRef} defaultValue={meaning}></input>
             </Input>
             <Input>
               <label>예문</label>
-              <input ref={examRef}></input>
+              <input ref={examRef} defaultValue={exam}></input>
             </Input>
             <Input>
               <label>해석</label>
-              <input ref={interpretationRef}></input>
+              <input ref={interpretationRef} defaultValue={interpre}></input>
             </Input>
             <button>수정하기</button>
           </form>
@@ -118,4 +152,12 @@ const Input = styled.div`
   }
 `;
 
-export default ModifyWord;
+function mapDispatchToProps(dispatch) {
+  return {
+    updateWord: (voca) => {
+      dispatch(updateWordFB(voca));
+    },
+  };
+}
+
+export default connect(null, mapDispatchToProps)(ModifyWord);

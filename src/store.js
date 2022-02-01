@@ -42,7 +42,7 @@ export const addWordFB = (word) => {
   };
 };
 
-// 색상 수정하기
+// 데이터(색상) 수정하기
 export const updateColorFB = (word) => {
   return async function (dispatch, getState) {
     // 수정할 도큐먼트를 가져오고,
@@ -56,6 +56,16 @@ export const updateColorFB = (word) => {
   };
 };
 
+export const updateWordFB = (word) => {
+  return async function (dispatch, getState) {
+    // 수정할 도큐먼트를 가져오고,
+    const docRef = doc(db, 'word', word.id);
+    // 수정합시다!
+
+    await updateDoc(docRef, word);
+  };
+};
+
 // 데이터 삭제하기
 export const deleteWordFB = (word_id) => {
   return async function (dispatch, getState) {
@@ -66,7 +76,6 @@ export const deleteWordFB = (word_id) => {
     const docRef = doc(db, 'word', word_id);
     await deleteDoc(docRef);
 
-    loadWordFB();
     window.location.replace('/'); // 새로고침
   };
 };

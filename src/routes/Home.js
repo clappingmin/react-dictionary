@@ -13,6 +13,8 @@ function Home({ voca, loadWord }) {
     loadWord();
   }, []);
 
+  // console.log(voca);
+
   return (
     <>
       <Link to="/">

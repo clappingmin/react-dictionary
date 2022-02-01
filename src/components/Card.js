@@ -2,32 +2,24 @@ import styled from 'styled-components';
 // 리액트 아이콘
 import { BsPencilSquare, BsTrashFill } from 'react-icons/bs';
 import { GiCheckMark } from 'react-icons/gi';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // 리덕스
 import { connect } from 'react-redux';
 import { updateColorFB, deleteWordFB } from '../store';
 
 // 페이지 이동
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Card({ voca, colorWord, deleteWord }) {
   const { word, pinyin, meaning, exam, interpre, id } = voca;
   let { clicked } = voca;
 
-  console.log(voca);
-
   const [color, setColor] = useState(clicked);
-
-  const navigate = useNavigate();
 
   function onClick() {
     setColor(!clicked);
     colorWord(voca);
-  }
-
-  function onUpdateBtn() {
-    navigate(`/word/${id}`);
   }
 
   function onDelete() {
@@ -47,16 +39,10 @@ function Card({ voca, colorWord, deleteWord }) {
             color={color ? '#fff' : 'rgb(230, 125, 154)'}
           />
 
-          <Link
-            to={{
-              pathname: `/word/${id}`,
-              state: { voca },
-            }}
-          >
+          <Link to={`/word/${id}`} state={voca}>
             <BsPencilSquare
               size="20"
               color={color ? '#fff' : 'rgb(230, 125, 154)'}
-              onClick={onUpdateBtn}
             />
           </Link>
 

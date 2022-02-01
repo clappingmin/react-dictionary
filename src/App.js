@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="word/:id" element={<ModifyWord />} />
+        <Route path="/word/:id" element={<ModifyWord />} />
         <Route path="/word/add" element={<AddWord />} />
         <Route path="/" element={<Home />} />
       </Routes>

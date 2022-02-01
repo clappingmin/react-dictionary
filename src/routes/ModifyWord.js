@@ -1,3 +1,4 @@
+// css
 import styled from 'styled-components';
 import Header from '../components/Header';
 import Container from '../components/Container';
@@ -5,6 +6,7 @@ import Container from '../components/Container';
 import { useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+// 리덕스, 파이어베이스
 import { connect } from 'react-redux';
 import { updateWordFB } from '../store';
 
@@ -18,7 +20,7 @@ function ModifyWord({ updateWord }) {
   const navigate = useNavigate();
 
   // Card.js 42번째 라인에서 보낸 데이터 받기
-  let location = useLocation();
+  const location = useLocation();
   const voca = location.state;
   const { word, pinyin, meaning, exam, interpre, id } = voca;
 

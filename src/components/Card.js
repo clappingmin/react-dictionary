@@ -12,16 +12,19 @@ import { updateColorFB, deleteWordFB } from '../store';
 import { Link } from 'react-router-dom';
 
 function Card({ voca, colorWord, deleteWord }) {
+  // 단어 object 비구조화 할당
   const { word, pinyin, meaning, exam, interpre, id } = voca;
   let { clicked } = voca;
 
   const [color, setColor] = useState(clicked);
 
+  // 색깔 변경
   function onClick() {
     setColor(!clicked);
     colorWord(voca);
   }
 
+  // 단어 삭제
   function onDelete() {
     deleteWord(id);
   }
@@ -122,34 +125,34 @@ const Container = styled.div`
   .pinyin {
     height: 25%;
     width: 100%;
-    word-wrap: break-word; //가로사이즈나 엘리먼트에 맞춰서 강제 줄바꿈 해줌
-    word-break: keep-all; // 한글일 경우 띄어쓰기 기준으로 줄바꿈 해준다.
+    text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
   }
   .mean {
     height: 25%;
     width: 100%;
-    word-wrap: break-word; //가로사이즈나 엘리먼트에 맞춰서 강제 줄바꿈 해줌
-    word-break: keep-all; // 한글일 경우 띄어쓰기 기준으로 줄바꿈 해준다.
+    text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
   }
   .example {
     height: 25%;
     width: 100%;
     font-size: 12px;
     color: rgb(61, 131, 211);
-    word-wrap: break-word; //가로사이즈나 엘리먼트에 맞춰서 강제 줄바꿈 해줌
-    word-break: keep-all; // 한글일 경우 띄어쓰기 기준으로 줄바꿈 해준다.
+    text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
   }
   .interpretation {
     height: 25%;
     width: 100%;
     font-size: 12px;
     color: rgb(61, 131, 211);
-    word-wrap: break-word; //가로사이즈나 엘리먼트에 맞춰서 강제 줄바꿈 해줌
-    word-break: keep-all; // 한글일 경우 띄어쓰기 기준으로 줄바꿈 해준다.
-    overflow: hidden; // 영역을 벗어나는 글자는 안보이게 해준다.
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 `;
 

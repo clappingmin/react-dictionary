@@ -1,19 +1,20 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// 컴포넌트
 import styled from 'styled-components';
 import Card from '../components/Card';
 import Header from '../components/Header';
-import Container from '../components/Container';
-import { connect } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
+import Container from '../components/Container';
+
+import { Link } from 'react-router-dom';
+// 리덕스
+import { connect } from 'react-redux';
 import { loadWordFB } from '../store';
 
 function Home({ voca, loadWord }) {
   useEffect(() => {
     loadWord();
   }, []);
-
-  // console.log(voca);
 
   return (
     <>
@@ -41,7 +42,6 @@ const Cards = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-
   gap: 20px;
 `;
 const AddBtn = styled.div`

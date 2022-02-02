@@ -19,7 +19,7 @@ function Home({ voca, loadWord }) {
   return (
     <>
       <Link to="/">
-        <Header>단어장</Header>
+        <Header>안뇽 단어장</Header>
       </Link>
       <Container>
         <Cards>

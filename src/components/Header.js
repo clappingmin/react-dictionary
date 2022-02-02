@@ -11,6 +11,7 @@ const Header = styled.div`
   line-height: 60px;
   font-size: 30px;
   background-color: #fff;
+  color: rgb(230, 125, 154);
 `;
 
 export default Header;

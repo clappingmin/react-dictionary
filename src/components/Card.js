@@ -101,9 +101,9 @@ const Container = styled.div`
       height: 100%;
       width: 80%;
       font-size: 25px;
-      word-wrap: break-word; //가로사이즈나 엘리먼트에 맞춰서 강제 줄바꿈 해줌
-      word-break: keep-all; // 한글일 경우 띄어쓰기 기준으로 줄바꿈 해준다.
+      text-overflow: ellipsis;
       overflow: hidden;
+      white-space: nowrap;
     }
     .btn {
       height: 100%;

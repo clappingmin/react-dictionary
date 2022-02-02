@@ -61,7 +61,7 @@ function ModifyWord({ updateWord }) {
   return (
     <>
       <Link to="/">
-        <Header>중국어 단어장</Header>
+        <Header>단어장</Header>
       </Link>
       <Container>
         <Wordbox>

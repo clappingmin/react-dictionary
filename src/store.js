@@ -56,12 +56,12 @@ export const updateColorFB = (word) => {
   };
 };
 
+// 데이터 수정하기
 export const updateWordFB = (word) => {
   return async function (dispatch, getState) {
     // 수정할 도큐먼트를 가져오고,
     const docRef = doc(db, 'word', word.id);
     // 수정합시다!
-
     await updateDoc(docRef, word);
   };
 };

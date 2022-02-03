@@ -57,5 +57,5 @@ yarn add react-intersection-observer
 
 [안뇽 단어장](http://hanghae99-react-voca.s3-website.ap-northeast-2.amazonaws.com/)
 
-|![완성](https://im6.ezgif.com/tmp/ezgif-6-c5cb35f9a5.gif)|![수정](https://im6.ezgif.com/tmp/ezgif-6-ca66a97ea0.gif)|
+|![완성](https://blog.kakaocdn.net/dn/c8Fram/btrspIYzJcx/CRmkKkLgZvcmLD9hHAxFWK/img.gif)|![수정](https://blog.kakaocdn.net/dn/bR7Paj/btrsnm9jVS2/cn7HEFkPXYKt6rHV5KocZk/img.gif)|
 |:---|---:|
